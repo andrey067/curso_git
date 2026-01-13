@@ -40,6 +40,12 @@ Commit as mudanças no stage com uma mensagem descritiva:
 git commit -m "Adiciona estrutura básica do arquivo index.html"
 ```
 
+Para adicionar e commitar arquivos já rastreados em um só comando (equivalente a `git add . && git commit -m`):
+
+```bash
+git commit -am "Mensagem do commit"
+```
+
 ## 5. Visualizando o Histórico de Commits
 
 Veja o histórico de commits para acompanhar as mudanças:
