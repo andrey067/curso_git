@@ -1,0 +1,24 @@
+{
+  "name": "git",
+  "version": "1.0.0",
+  "description": "Este README apresenta os comandos básicos do Git, usando o arquivo `index.html` como exemplo prático.",
+  "homepage": "https://github.com/andrey067/curso_git#readme",
+  "bugs": {
+    "url": "https://github.com/andrey067/curso_git/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrey067/curso_git.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}
