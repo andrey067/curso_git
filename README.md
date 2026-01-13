@@ -180,7 +180,31 @@ git checkout main
 git merge feature-nova
 ```
 
-## 14. Clonando um Repositório Remoto
+## 14. Fazendo Rebase de Branches
+
+O `git rebase` reorganiza o histórico de commits aplicando os commits de uma branch sobre a base de outra, criando um histórico linear sem commits de merge. Use quando quiser manter o histórico limpo e linear, especialmente em branches de feature antes de fazer merge, ou para atualizar uma branch com as últimas mudanças da main.
+
+Para rebase de uma branch feature sobre main:
+
+```bash
+git checkout feature-nova
+git rebase main
+```
+
+Para rebase interativo (permite editar, squash ou reordenar commits):
+
+```bash
+git rebase -i HEAD~3  # Para os últimos 3 commits
+```
+
+Após o rebase, volte à main e faça fast-forward merge:
+
+```bash
+git checkout main
+git merge feature-nova
+```
+
+## 15. Clonando um Repositório Remoto
 
 Para clonar um repositório existente de um servidor remoto:
 
@@ -188,7 +212,7 @@ Para clonar um repositório existente de um servidor remoto:
 git clone <url-do-repositorio>
 ```
 
-## 15. Fazendo Push para o Repositório Remoto
+## 16. Fazendo Push para o Repositório Remoto
 
 Envie seus commits locais para o repositório remoto:
 
@@ -196,7 +220,7 @@ Envie seus commits locais para o repositório remoto:
 git push origin main
 ```
 
-## 16. Fazendo Pull de Mudanças
+## 17. Fazendo Pull de Mudanças
 
 Puxe as mudanças mais recentes do repositório remoto:
 
@@ -204,7 +228,7 @@ Puxe as mudanças mais recentes do repositório remoto:
 git pull origin main
 ```
 
-## 17. Configurando o Git
+## 18. Configurando o Git
 
 Configure seu nome e email (faça isso uma vez):
 
@@ -213,7 +237,7 @@ git config --global user.name "Seu Nome"
 git config --global user.email "seu.email@exemplo.com"
 ```
 
-## 18. Ignorando Arquivos
+## 19. Ignorando Arquivos
 
 Crie um arquivo `.gitignore` para ignorar arquivos que não devem ser versionados, como arquivos temporários ou de build.
 
