@@ -237,7 +237,19 @@ git config --global user.name "Seu Nome"
 git config --global user.email "seu.email@exemplo.com"
 ```
 
-## 19. Ignorando Arquivos
+## 19. Trabalhando com Tags
+
+Tags são referências fixas a commits específicos, usadas para marcar versões de releases. Consulte o [README-tags.md](README-tags.md) para documentação completa sobre tags.
+
+**Comandos básicos:**
+```bash
+git tag v1.0                           # Criar tag
+git tag -a v1.0 -m "Release v1.0"     # Tag annotated
+git push origin v1.0                   # Enviar tag
+git push --tags                        # Enviar todas
+```
+
+## 20. Ignorando Arquivos
 
 Crie um arquivo `.gitignore` para ignorar arquivos que não devem ser versionados, como arquivos temporários ou de build.
 
@@ -250,3 +262,5 @@ node_modules/
 ```
 
 Esses são os comandos básicos e avançados para usar o Git. Pratique com o arquivo `index.html` para se familiarizar!
+
+Para mais detalhes sobre tags, consulte o [README-tags.md](README-tags.md).
