@@ -100,6 +100,17 @@ else
 	echo "✅ $HOME/.local/bin já está no PATH"
 fi
 
+# Adicionar alias 'ag' para auto-git
+ALIAS_ENTRY='alias ag="auto-git"'
+
+if ! grep -q "alias ag=" "$RC_FILE" 2>/dev/null; then
+	echo "📝 Adicionando alias 'ag' para auto-git em $RC_FILE..."
+	echo "$ALIAS_ENTRY" >>"$RC_FILE"
+	echo "✅ Alias 'ag' configurado!"
+else
+	echo "✅ Alias 'ag' já está configurado"
+fi
+
 # Recarregar configuração do shell
 echo "🔄 Atualizando ambiente..."
 export PATH="$HOME/.local/bin:$PATH"
@@ -110,9 +121,12 @@ echo ""
 echo "📚 Para usar o auto-git:"
 echo "   1. Recarregue seu terminal ou execute: source $RC_FILE"
 echo "   2. Navegue até um repositório Git"
-echo "   3. Execute: auto-git"
+echo "   3. Execute: auto-git (ou use o alias 'ag')"
 echo ""
 echo "💡 Comandos disponíveis:"
 echo "   - Switch branch: Trocar de branch interativamente"
 echo "   - Git merge: Fazer merge de branches"
 echo "   - Delete branch: Deletar branches"
+echo "   - Manage tags: Criar, listar e gerenciar tags"
+echo ""
+echo "⚡ Atalho: Use 'ag' em vez de 'auto-git'"

@@ -122,7 +122,7 @@ function create_tag() {
 	read -p "Enter tag message: " tag_message
 
 	if [ -z "$tag_message" ]; then
-		tag_message="Tag $tag_name"
+		# tag_message="Tag $tag_name"
 	fi
 
 	# Criar tag annotated

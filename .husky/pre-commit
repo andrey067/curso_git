@@ -1,0 +1,80 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit checks..."
+
+# Verificar se há arquivos staged
+if git diff --cached --quiet; then
+    echo "❌ No files staged for commit"
+    exit 1
+fi
+
+# Validar arquivos HTML
+echo "📝 Validating HTML files..."
+for file in $(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(html)$'); do
+    if [ -f "$file" ]; then
+        # Verificar se há tags HTML básicas
+        if ! grep -q "<html" "$file"; then
+            echo "❌ Error: $file doesn't appear to be a valid HTML file"
+            exit 1
+        fi
+        echo "✅ $file is valid"
+    fi
+done
+
+# Validar arquivos Markdown
+echo "📝 Validating Markdown files..."
+for file in $(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(md)$'); do
+    if [ -f "$file" ]; then
+        # Verificar se o arquivo não está vazio
+        if [ ! -s "$file" ]; then
+            echo "❌ Error: $file is empty"
+            exit 1
+        fi
+        echo "✅ $file is valid"
+    fi
+done
+
+# Validar arquivos Shell Script
+echo "📝 Validating shell scripts..."
+for file in $(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(sh)$'); do
+    if [ -f "$file" ]; then
+        # Verificar shebang
+        if ! head -n 1 "$file" | grep -q '^#!'; then
+            echo "⚠️  Warning: $file missing shebang"
+        fi
+        
+        # Verificar sintaxe com shellcheck se disponível
+        if command -v shellcheck &> /dev/null; then
+            if ! shellcheck "$file"; then
+                echo "❌ Error: $file has shellcheck errors"
+                exit 1
+            fi
+        fi
+        echo "✅ $file is valid"
+    fi
+done
+
+# Verificar se há conflitos de merge não resolvidos
+echo "🔍 Checking for merge conflicts..."
+if git diff --cached --check; then
+    echo "✅ No merge conflicts found"
+else
+    echo "❌ Error: Merge conflicts detected"
+    exit 1
+fi
+
+# Verificar tamanho de arquivos (limitar a 1MB)
+echo "📊 Checking file sizes..."
+for file in $(git diff --cached --name-only --diff-filter=ACM); do
+    if [ -f "$file" ]; then
+        size=$(wc -c < "$file")
+        if [ "$size" -gt 1048576 ]; then
+            echo "❌ Error: $file is larger than 1MB ($size bytes)"
+            exit 1
+        fi
+    fi
+done
+
+echo "✅ All pre-commit checks passed!"
+echo "📦 Ready to commit"
